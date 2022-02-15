@@ -1,13 +1,15 @@
 package com.example.mytrips.data.model
 
-import com.google.gson.annotations.JsonAdapter
+import androidx.annotation.Keep
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
+@Keep
 data class TripDto(
     val id: String,
-    val startTime: String,
-    val endTime: String,
-    val locationDto: LocationDto,
+    @Json(name = "start") val startTime: String,
+    @Json(name = "end") val endTime: String,
+    @Json(name = "location") val locationDto: LocationDto,
     val image: String
 )

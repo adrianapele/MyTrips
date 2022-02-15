@@ -2,8 +2,9 @@ package com.example.mytrips.data.mapper
 
 import com.example.mytrips.data.model.TripDto
 import com.example.mytrips.domain.model.Trip
+import javax.inject.Inject
 
-class TripMapper(
+class TripMapper @Inject constructor(
     private val locationMapper: LocationMapper
 ) {
 

@@ -4,8 +4,9 @@ import com.example.mytrips.data.mapper.TripMapper
 import com.example.mytrips.domain.model.Trip
 import com.example.mytrips.domain.source.TripsRemoteAPIService
 import com.example.mytrips.domain.source.TripsRemoteDataSource
+import javax.inject.Inject
 
-class TripsRemoteDataSourceImpl(
+class TripsRemoteDataSourceImpl @Inject constructor(
     private val remoteAPIService: TripsRemoteAPIService,
     private val mapper: TripMapper
 ): TripsRemoteDataSource {
@@ -13,7 +14,7 @@ class TripsRemoteDataSourceImpl(
     override fun getRemoteTrips(): List<Trip>? {
         val response = remoteAPIService.getTrips().execute()
         return if (response.isSuccessful) {
-            response.body()?.map { mapper.mapDtoToModel(it)}
+            response.body()?.trips?.map { mapper.mapDtoToModel(it) }
         } else null
     }
 }

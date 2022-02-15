@@ -1,13 +1,12 @@
 package com.example.mytrips.domain.source
 
-import com.example.mytrips.data.model.TripDto
+import com.example.mytrips.data.model.ResponseDto
+import com.example.mytrips.di.Constants.Companion.TRIPS_PATH
 import retrofit2.Call
 import retrofit2.http.GET
 
-const val PATH = "interview-data.json"
-
 interface TripsRemoteAPIService {
 
-    @GET(PATH)
-    fun getTrips(): Call<List<TripDto>>
+    @GET(TRIPS_PATH)
+    fun getTrips(): Call<ResponseDto>
 }
