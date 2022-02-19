@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentTripsListing">
+
+    <fragment
+        android:id="@+id/fragmentTripsListing"
+        android:name="com.example.mytrips.presentation.ui.TripsListingFragment"
+        android:label="fragment_trips_listing"
+        tools:layout="@layout/fragment_trips_listing">
+
+        <action
+            android:id="@+id/action_trips_listing_to_trips_details"
+            app:destination="@id/fragmentTripDetails"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentTripDetails"
+        android:name="com.example.mytrips.presentation.ui.TripDetailsFragment"
+        android:label="fragment_trip_details"
+        tools:layout="@layout/fragment_trip_details" />
+
+</navigation>

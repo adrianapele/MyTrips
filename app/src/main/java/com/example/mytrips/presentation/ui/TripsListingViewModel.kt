@@ -9,15 +9,13 @@ import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+open class TripsListingViewModel @Inject constructor(
     private val getTripsUseCase: GetTripsUseCase,
 ): ViewModel() {
 
-    val exampleLiveData = MutableLiveData(false)
     val tripsLiveData = MutableLiveData<List<Trip>>()
 
     init {
-        exampleLiveData.value = true
         loadTrips()
     }
 

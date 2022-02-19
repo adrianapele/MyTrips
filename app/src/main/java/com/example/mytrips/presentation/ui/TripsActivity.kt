@@ -8,20 +8,12 @@ import com.example.mytrips.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class TripsActivity: AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+//    private val viewModel: TripsMainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel.exampleLiveData.observe(this) {
-            Log.d("onCreate", "on observe $it")
-        }
-
-        viewModel.tripsLiveData.observe(this) {
-            Log.d("onCreate", "$it")
-        }
     }
 }
