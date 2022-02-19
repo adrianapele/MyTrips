@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mytrips.domain.interactors.GetTripsUseCase
 import com.example.mytrips.domain.model.Trip
+import com.example.mytrips.presentation.model.TripView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
@@ -14,6 +15,7 @@ open class TripsListingViewModel @Inject constructor(
 ): ViewModel() {
 
     val tripsLiveData = MutableLiveData<List<Trip>>()
+    val tripsViewLiveData = MutableLiveData<List<TripView>>()
 
     init {
         loadTrips()
@@ -31,6 +33,12 @@ open class TripsListingViewModel @Inject constructor(
 
             override fun onNext(t: List<Trip>) {
                 tripsLiveData.value = t
+                tripsViewLiveData.value = t
+                    .groupBy {
+                        it.startTime
+                    }
+                    .entries
+                    .map { TripView(it.key, it.value) }
             }
 
             override fun onError(e: Throwable) {

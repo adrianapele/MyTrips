@@ -1,8 +1,8 @@
 package com.example.mytrips.presentation.ui
 
-import com.example.mytrips.presentation.model.TripView
+import com.example.mytrips.domain.model.Trip
 
 interface TripClickListener {
 
-    fun onTripClicked(tripView: TripView)
+    fun onTripClicked(trip: Trip)
 }

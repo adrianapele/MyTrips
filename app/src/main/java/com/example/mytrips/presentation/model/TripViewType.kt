@@ -2,5 +2,5 @@ package com.example.mytrips.presentation.model
 
 sealed class TripViewType
 
-object TripHeader
-object TripHeaderDetails
+object TripHeader: TripViewType()
+object TripHeaderDetails: TripViewType()
