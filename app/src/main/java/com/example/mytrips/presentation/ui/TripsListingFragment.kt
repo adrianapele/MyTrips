@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mytrips.R
 import com.example.mytrips.databinding.FragmentTripsListingBinding
 import com.example.mytrips.domain.model.Trip
+import com.example.mytrips.utils.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,8 @@ class TripsListingFragment: Fragment(), TripClickListener {
     private val adapter: TripsAdapter by lazy {
         TripsAdapter(this)
     }
+
+    private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +53,9 @@ class TripsListingFragment: Fragment(), TripClickListener {
     }
 
     private fun initViews() {
+        progressDialog = ProgressDialog(requireContext()).create()
+        progressDialog?.show()
+
         recyclerView = binding?.rvTrips
         recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = adapter
@@ -57,11 +64,21 @@ class TripsListingFragment: Fragment(), TripClickListener {
     private fun setObservers() {
         viewModel.tripsViewLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            progressDialog?.dismiss()
         }
     }
 
     override fun onTripClicked(trip: Trip) {
         val action = TripsListingFragmentDirections.actionTripsListingToTripsDetails(trip.id)
         navController.navigate(action)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (progressDialog?.isShowing == true) {
+            progressDialog?.dismiss()
+            progressDialog = null
+        }
     }
 }
