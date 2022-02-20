@@ -45,6 +45,4 @@ object AppModule {
     fun provideTripsDataSource(tripsRemoteDataSourceImpl: TripsRemoteDataSourceImpl): TripsRemoteDataSource =
         tripsRemoteDataSourceImpl
 
-//    @Provides
-//    fun applicationContext(@ApplicationContext application: Application): Context = application.applicationContext
 }
