@@ -57,6 +57,7 @@ class TripsListingFragment: Fragment(), TripClickListener {
         progressDialog?.show()
 
         recyclerView = binding?.rvTrips
+        recyclerView?.isNestedScrollingEnabled = false
         recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = adapter
     }
