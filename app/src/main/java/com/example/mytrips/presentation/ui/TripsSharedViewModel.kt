@@ -34,9 +34,7 @@ open class TripsSharedViewModel @Inject constructor(
             override fun onNext(t: List<Trip>) {
                 loadedTrips = t
                 tripsViewLiveData.value = t
-                    .groupBy {
-                        it.startTime
-                    }
+                    .groupBy { it.startDate }
                     .entries
                     .map { TripView(it.key, it.value) }
             }

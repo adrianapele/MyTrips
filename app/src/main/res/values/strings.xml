@@ -2,4 +2,7 @@
     <string name="app_name">MyTrips</string>
     <string name="toolbar_trips">Trips</string>
     <string name="toolbar_trip_details">Trip Details</string>
+    <string name="trip_details_short">From %1$s to %2$s</string>
+    <string name="trip_details_start">Start: %s</string>
+    <string name="trip_details_end">End: %s</string>
 </resources>

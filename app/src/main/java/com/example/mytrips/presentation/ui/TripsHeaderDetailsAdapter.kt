@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytrips.R
 import com.example.mytrips.databinding.ViewItemTripHeaderDetailsBinding
 import com.example.mytrips.domain.model.Trip
 import com.squareup.picasso.Picasso
@@ -30,12 +31,14 @@ class TripHeaderDetailsViewHolder(
 ): RecyclerView.ViewHolder(view.root) {
 
     fun bind(trip: Trip) {
-        view.container.setOnClickListener { listener.onTripClicked(trip) }
-
         Picasso.get().load(trip.image).into(view.ivTrip)
 
-        val details = "${trip.startTime} + ${trip.endTime} ${trip.location.endAddress.city}"
+        val startDetails = "${trip.location.startAddress.city} ${trip.startTime}"
+        val endDetails = "${trip.location.endAddress.city} ${trip.endTime}"
+        val details = view.container.context.getString(R.string.trip_details_short, startDetails, endDetails)
         view.tvDetails.text = details
+
+        view.container.setOnClickListener { listener.onTripClicked(trip) }
     }
 }
 

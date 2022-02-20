@@ -37,7 +37,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="This is an exampele"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                     android:textSize="18sp" />
