@@ -12,7 +12,7 @@ class TripMapper @Inject constructor(
 
     fun mapDtoToModel(dto: TripDto): Trip {
         val startDateTime = dateTimeFormatter.format(dto.startTime)
-        val endDateTime = dateTimeFormatter.format(dto.startTime)
+        val endDateTime = dateTimeFormatter.format(dto.endTime)
 
         return Trip(
             id = dto.id,
