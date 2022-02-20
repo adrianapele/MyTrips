@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytrips.databinding.ViewItemTripHeaderDetailsBinding
 import com.example.mytrips.domain.model.Trip
+import com.squareup.picasso.Picasso
 
 class TripsHeaderDetailsAdapter(
     private val listener: TripClickListener
@@ -30,7 +31,8 @@ class TripHeaderDetailsViewHolder(
 
     fun bind(trip: Trip) {
         view.container.setOnClickListener { listener.onTripClicked(trip) }
-//        view.ivTrip = tripView.trip.image // load with glide or something
+
+        Picasso.get().load(trip.image).into(view.ivTrip)
 
         val details = "${trip.startTime} + ${trip.endTime} ${trip.location.endAddress.city}"
         view.tvDetails.text = details

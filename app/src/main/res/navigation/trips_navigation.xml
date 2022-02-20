@@ -25,6 +25,10 @@
         android:id="@+id/fragmentTripDetails"
         android:name="com.example.mytrips.presentation.ui.TripDetailsFragment"
         android:label="fragment_trip_details"
-        tools:layout="@layout/fragment_trip_details" />
+        tools:layout="@layout/fragment_trip_details" >
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

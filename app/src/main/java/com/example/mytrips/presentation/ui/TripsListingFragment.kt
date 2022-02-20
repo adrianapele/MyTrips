@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytrips.R
 import com.example.mytrips.databinding.FragmentTripsListingBinding
 import com.example.mytrips.domain.model.Trip
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TripsListingFragment: Fragment(), TripClickListener {
 
-    private val viewModel: TripsListingViewModel by viewModels()
+    private val viewModel: TripsSharedViewModel by activityViewModels()
 
     private val navController: NavController
         get() = NavHostFragment.findNavController(this)
@@ -42,6 +42,8 @@ class TripsListingFragment: Fragment(), TripClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.setTitle(R.string.toolbar_trips)
+
         initViews()
         setObservers()
     }
@@ -50,8 +52,6 @@ class TripsListingFragment: Fragment(), TripClickListener {
         recyclerView = binding?.rvTrips
         recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = adapter
-
-
     }
 
     private fun setObservers() {
@@ -61,6 +61,7 @@ class TripsListingFragment: Fragment(), TripClickListener {
     }
 
     override fun onTripClicked(trip: Trip) {
-        Toast.makeText(context, "Clicked: trip with id ${trip.id}", Toast.LENGTH_LONG).show()
+        val action = TripsListingFragmentDirections.actionTripsListingToTripsDetails(trip.id)
+        navController.navigate(action)
     }
 }

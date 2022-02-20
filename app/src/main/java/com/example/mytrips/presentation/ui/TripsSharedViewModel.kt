@@ -10,11 +10,11 @@ import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 @HiltViewModel
-open class TripsListingViewModel @Inject constructor(
+open class TripsSharedViewModel @Inject constructor(
     private val getTripsUseCase: GetTripsUseCase,
 ): ViewModel() {
 
-    val tripsLiveData = MutableLiveData<List<Trip>>()
+    var loadedTrips: List<Trip>? = null
     val tripsViewLiveData = MutableLiveData<List<TripView>>()
 
     init {
@@ -32,7 +32,7 @@ open class TripsListingViewModel @Inject constructor(
             }
 
             override fun onNext(t: List<Trip>) {
-                tripsLiveData.value = t
+                loadedTrips = t
                 tripsViewLiveData.value = t
                     .groupBy {
                         it.startTime
@@ -50,5 +50,9 @@ open class TripsListingViewModel @Inject constructor(
         super.onCleared()
 
         getTripsUseCase.dispose()
+    }
+
+    fun getTripById(tripId: String): Trip? {
+        return loadedTrips?.find { it.id == tripId }
     }
 }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdk 31
@@ -84,6 +84,8 @@ dependencies {
 
     def okhttp_version = "5.0.0-alpha.4"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+
+    implementation "com.squareup.picasso:picasso:2.71828"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
